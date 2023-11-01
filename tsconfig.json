@@ -1,0 +1,39 @@
+{
+    "include": [
+        "src",
+        "types",
+        "global.d.ts"
+    ],
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@root/*": [
+                "./*"
+            ],
+            "@tys/*": [
+                "./types/*"
+            ],
+            "@/*": [
+                "./src/*"
+            ]
+        },
+        "target": "esnext",
+        "module": "esnext",
+        "strict": true,
+        "lib": [
+            "esnext",
+            "dom",
+            "webworker"
+        ],
+        "resolveJsonModule": true,
+        "importHelpers": false,
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "allowJs": false,
+        "forceConsistentCasingInFileNames": true,
+        "declaration": true,
+        "declarationDir": "./dist/types",
+        "emitDeclarationOnly": true,
+        "outDir": "./dist"
+    }
+}

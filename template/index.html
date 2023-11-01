@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+	<title>Document</title>
+</head>
+
+<body>
+	<div style="width: 100px; height: 100px; background-color: red">
+		<img src="https://img0.baidu.com/it/u=3021883569,1259262591&fm=253&fmt=auto&app=120&f=JPEG?w=1140&h=641"
+			width="100" height="100" />
+	</div>
+</body>
+
+</html>
+<script type="module">
+	import performancePlugin from "./esm/plugins/performance.js";
+	import ajaxInterceptPlugin from "./esm/plugins/xmlRequestIntercept.js";
+	import monitor from "./esm/browser.js";
+
+	// import monitor from "./esm/webworker.js";
+
+	monitor
+		.use(performancePlugin)
+		.use(ajaxInterceptPlugin)
+		.init({
+			debug: true,
+		});
+
+	const datas = [
+		{
+			origin: "web", // 上报来源：web 和 node
+			platform: "pc", // 平台：pc 和 h5，将来还可能有 webview
+			url: "https://www.meex.com/login", // 页面的地址，在 target 为 node 时为空
+			type: "ajax", // 数据类型，可能有：ajax（接口数据）、perf（性能数据）
+			// 扩展字段，里面放不同数据类型的自定义的字段
+			ext: {
+				r: "/login_in",
+				h: "www.meex.com",
+				hc: "0",
+				rc: "-10001",
+				msg: "系统异常，请稍后再试",
+			},
+		},
+		{
+			origin: "web", // 上报来源：web 和 node
+			platform: "pc", // 平台：pc 和 h5，将来还可能有 webview
+			url: "https://www.meex.com/login", // 页面的地址，在 target 为 node 时为空
+			type: "ajax", // 数据类型，可能有：ajax（接口数据）、perf（性能数据）
+			// 扩展字段，里面放不同数据类型的自定义的字段
+			ext: {
+				r: "/login_in",
+				h: "www.meex.com",
+				hc: "0",
+				rc: "-10001",
+				msg: "系统异常，请稍后再试",
+			},
+		},
+	];
+
+	datas.forEach((data) => {
+		monitor.upload(data);
+	});
+</script>
+<script>
+	setTimeout(() => {
+		const xhr = new XMLHttpRequest();
+		xhr.open("GET", "https://www.meex.com/sssss/ssss");
+		xhr.send();
+	}, 10000);
+</script>
